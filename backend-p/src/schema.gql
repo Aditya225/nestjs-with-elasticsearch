@@ -1,0 +1,24 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LogEntry {
+  id: ID!
+  level: String!
+  message: String!
+  service_name: String!
+  timestamp: String!
+}
+
+type Mutation {
+  pushLog(level: String!, message: String!, service_name: String!): LogEntry!
+}
+
+type Query {
+  logs: [LogEntry!]!
+  searchLog(level: String, searchTerm: String, service: String): [LogEntry!]!
+}
+
+type Subscription {
+  logAdded: LogEntry!
+}
