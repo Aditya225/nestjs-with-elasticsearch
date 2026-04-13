@@ -1,0 +1,39 @@
+name: LogPulse CI-CD Pipeline
+
+on:
+  push:
+    branches: [ main ]  # Jab bhi main branch pe push hoga, ye chalega
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        # Kyunki aapka NestJS sub-folder mein hai
+        run: npm install --force
+        working-directory: ./backend-p
+
+      - name: Build NestJS App
+        run: npm run build
+        working-directory: ./backend-p
+
+  docker-build:
+    needs: build # Pehle build check hoga, phir docker image banegi
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          docker build -t logpulse-backend ./backend-p
+          echo "Docker Image built successfully!"
