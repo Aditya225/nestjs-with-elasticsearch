@@ -1,0 +1,21 @@
+{
+  "name": "logpulse-monorepo",
+  "version": "1.0.0",
+  "description": "Master control for NestJS and Next.js",
+  "scripts": {
+    "start:backend": "cd backend-p && npm run start:dev",
+    "start:frontend": "cd frontend-p && npm run dev",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "install:all": "cd backend-p && npm install && cd ../frontend-p && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@nestjs/bullmq": "^11.0.4",
+    "bullmq": "^5.73.5",
+    "fs": "^0.0.1-security",
+    "pdf-parse": "^2.4.5"
+  }
+}
